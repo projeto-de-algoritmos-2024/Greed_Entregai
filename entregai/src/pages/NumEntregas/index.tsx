@@ -1,5 +1,5 @@
-import { Button, TextBox } from './styles';
-
+import './styles.css';
+import logo from '../../assets/Logo1.png'
 
 const NumEntregas: React.FC = () => {
     return (
@@ -12,17 +12,18 @@ const NumEntregas: React.FC = () => {
         height: '100vh',
         margin: 10
       }}>
-        <h1>ENTREGAÍ</h1>
-        <h3>Seu tempo, nossa prioridade</h3>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <TextBox placeholder="Insira o número de entregas" />
-        <br></br>
-        <br></br>
-        <Button>Próximo</Button>
-    </div>
+   
+        <img src={logo} alt="Logo" width="200" height="200" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <input className="text-box" placeholder="Insira o número de entregas" />
+        <br />
+        <button className="button">Próximo</button>
+      </div>
     );
   };
 

@@ -1,4 +1,37 @@
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+     @font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 300;
+    src: url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap');
+  }
+
+    body {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+ `;   
+
+ export const Title = styled.h1`
+  font-family: 'Oswald', sans-serif;
+  font-size : 48px;
+  font-weight: 500;
+  color: #0C1F71;
+  text-align: center;
+`;
+
+export const Subtitle = styled.h3`
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #000000;
+  text-align: center;
+`;
 
 export const TextBox = styled.input`
   width: 100%;
@@ -54,6 +87,7 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
 `;
+
 
 
  
