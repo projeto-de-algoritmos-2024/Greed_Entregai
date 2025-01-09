@@ -1,20 +1,5 @@
 import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
-import FuturaBold from '../../assets/Futura-Bold.woff';
-import FuturaMediumItalic from '../../assets/Futura-Medium-Italic.woff';
-
-export const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: "Futura-Bold";
-    src: url($FuturaBold) format('truetype');
-  }
-
-  @font-face {
-    font-family: "Futura-Medium-Italic";
-    src: url($FuturaMediumItalic) format('truetype');
-  } 
-  `;
-
+  
 export const TextBox = styled.input`
   width: 100%;
   max-width: 400px;

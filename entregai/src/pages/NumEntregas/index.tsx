@@ -1,7 +1,14 @@
 import './styles.css';
 import logo from '../../assets/Logo1.png'
+import { useNavigate } from 'react-router-dom';
 
 const NumEntregas: React.FC = () => {
+    const navigate = useNavigate();
+
+    const handleNext = () => {
+      navigate('/horarios');
+    };
+
     return (
     <div
       style={{
@@ -22,9 +29,9 @@ const NumEntregas: React.FC = () => {
         <br />
         <input className="text-box" placeholder="Insira o número de entregas" />
         <br />
-        <button className="button">Próximo</button>
+        <button type="submit" className="button" onClick={handleNext}>Próximo</button>
       </div>
     );
   };
 
-export default NumEntregas
+export default NumEntregas;

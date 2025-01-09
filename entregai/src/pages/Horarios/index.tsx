@@ -1,7 +1,15 @@
-//import './styles.css';
+import './styles.css';
 import logo from '../../assets/Logo1.png'
+import { useNavigate } from 'react-router-dom';
 
 const Horarios : React.FC = () => {
+
+    const navigate = useNavigate();
+
+    const handleNext = () => {
+      navigate('/resultado');
+    };
+
     return (
     <div
       style={{
@@ -21,10 +29,12 @@ const Horarios : React.FC = () => {
         <br />
         <br />
         <br />
+        <button  type="submit" className="button" onClick={handleNext}>Criar cronograma</button>
+
       </div>
     );
   };
 
 
 
-export default Horarios
+export default Horarios;
