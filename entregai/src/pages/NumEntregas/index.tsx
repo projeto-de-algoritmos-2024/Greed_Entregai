@@ -1,12 +1,24 @@
 import './styles.css';
 import logo from '../../assets/Logo1.png'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const NumEntregas: React.FC = () => {
+    const [numEntregas, setNumEntregas] = useState<number | ''>('');
     const navigate = useNavigate();
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setNumEntregas(value ? Number.parseInt(value, 10) : '');
+    };
+
     const handleNext = () => {
-      navigate('/horarios');
+      if(numEntregas && numEntregas > 0){
+        navigate('/horarios', {state: {numEntregas} });
+      }
+      else {
+        alert('Por favor, insira um número válido de entregas');
+      }
     };
 
     return (
@@ -27,7 +39,12 @@ const NumEntregas: React.FC = () => {
         <br />
         <br />
         <br />
-        <input className="text-box" placeholder="Insira o número de entregas" />
+        <input
+              type="number"
+              value={numEntregas}
+              onChange={handleChange}
+              className="text-box" 
+              placeholder="Insira o número de entregas" />
         <br />
         <button type="submit" className="button" onClick={handleNext}>Próximo</button>
       </div>

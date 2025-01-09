@@ -1,4 +1,11 @@
-
+.subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+  }
+  
 /* Input Box */
 .text-box {
   width: 100%;
@@ -53,3 +60,25 @@
   color: #888;
   cursor: not-allowed;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .time-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .time-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+  }
