@@ -10,7 +10,40 @@ const Horarios: React.FC = () => {
     const navigate = useNavigate();
 
     const handleNext = () => {
-        navigate('/resultado'); // Corrected navigation path
+        // Coleta os valores dos inputs de hora
+        const startTimes = Array.from({ length: numEntregas }).map((_, index) =>
+            (document.querySelector(`input[name="startTime-${index}"]`) as HTMLInputElement).value
+        );
+        const endTimes = Array.from({ length: numEntregas }).map((_, index) =>
+            (document.querySelector(`input[name="endTime-${index}"]`) as HTMLInputElement).value
+        );
+
+        // Verifica se todos os campos de horário estão preenchidos
+        const allFieldsFilled = startTimes.every(time => time !== "") && endTimes.every(time => time !== "");
+
+        if (!allFieldsFilled) {
+            alert('Por favor, preencha todos os horários.');
+            return;
+        }
+
+        // Verifica se os horários de início são antes dos horários de fim
+        const invalidTimes = startTimes.some((startTime, index) => {
+            return new Date(`1970-01-01T${startTime}:00`) >= new Date(`1970-01-01T${endTimes[index]}:00`);
+        });
+
+        if (invalidTimes) {
+            alert('O horário de início deve ser antes do horário de término em todas as entregas.');
+            return;
+        }
+
+        // Cria o array de horarios para enviar para a página de resultados
+        const horarios = startTimes.map((startTime, index) => ({
+            startTime,
+            endTime: endTimes[index],
+        }));
+
+        // Passa os dados para a página de resultados
+        navigate('/resultado', { state: { numEntregas, horarios } });
     };
 
     return (
@@ -47,6 +80,8 @@ const Horarios: React.FC = () => {
                 
               </div>
 
+              <br />
+              <button type="submit" className="button" onClick={handleNext}>Criar cronograma</button>
             
         </div>
     );
