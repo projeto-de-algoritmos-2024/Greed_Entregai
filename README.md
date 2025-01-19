@@ -1,6 +1,6 @@
 # Entregaí :articulated_lorry:
 
-**Número da Lista**: X<br>
+**Número da Lista**: 4<br>
 **Conteúdo da Disciplina**: Greed<br>
 
 ## Alunos
