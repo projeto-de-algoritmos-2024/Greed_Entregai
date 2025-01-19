@@ -10,7 +10,8 @@
 | 22/1022050  |  Larissa de Jesus Vieira |
 
 ## Sobre 
-O projeto EntregAí foi idealizado para demonstrar a implementação do algoritmo Interval Scheduling, que prioriza as entregas por ordem de finalização. Caso encontre um conflito, ele descarta uma das opções. 
+
+O projeto EntregAí foi desenvolvido para demonstrar a aplicação prática do algoritmo de Interval Scheduling, que organiza entregas priorizando aquelas com horários de término mais próximos. Em situações de conflito, onde duas ou mais entregas se sobrepõem no tempo, o algoritmo descarta as opções menos viáveis, garantindo uma agenda otimizada e sem sobreposições. Essa abordagem exemplifica como problemas de escalonamento podem ser resolvidos de forma eficiente em cenários reais.
 
 ## Screenshots
 
@@ -19,16 +20,33 @@ O projeto EntregAí foi idealizado para demonstrar a implementação do algoritm
         <p style="text-align: center"><b>Figura 1:</b> Página Inicial</p>
     </font>
 
-<img src="https://github.com/UnBArqDsw2024-2/2024.2_G10_Recomendacao_Entrega_01/blob/BPMN_forum/comentario/docs/imagens/logo.png" alt="Questão 7" width="300px">
+<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaInicial.png" width="300px">
+
+
+<div align="center">
+    <font size="3">
+        <p style="text-align: center"><b>Figura 2:</b> Página de horários</p>
+    </font>
+
+<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaHorarios.png" width="300px">
+
+
+<div align="center">
+    <font size="3">
+        <p style="text-align: center"><b>Figura 3:</b> Página de resultados</p>
+    </font>
+
+<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaResultados.png" width="300px">
 
 
 
-## Instalação 
+
+## Instalação e Uso
 **Linguagem**: Typescript<br>
 **Framework**: React.js<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
 
-## Uso 
+
+
 
 ## Vídeo da apresentação
 --
