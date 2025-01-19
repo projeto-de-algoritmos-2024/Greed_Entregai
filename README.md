@@ -20,7 +20,7 @@ O projeto EntregAí foi desenvolvido para demonstrar a aplicação prática do a
         <p style="text-align: center"><b>Figura 1:</b> Página Inicial</p>
     </font>
 
-<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaInicial.png" width="300px">
+<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaInicial.png" width="700px">
 
 
 <div align="center">
@@ -28,7 +28,7 @@ O projeto EntregAí foi desenvolvido para demonstrar a aplicação prática do a
         <p style="text-align: center"><b>Figura 2:</b> Página de horários</p>
     </font>
 
-<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaHorarios.png" width="300px">
+<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaHorarios.png" width="700px">
 
 
 <div align="center">
@@ -36,7 +36,7 @@ O projeto EntregAí foi desenvolvido para demonstrar a aplicação prática do a
         <p style="text-align: center"><b>Figura 3:</b> Página de resultados</p>
     </font>
 
-<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaResultados.png" width="300px">
+<img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaResultados.png" width="700px">
 
 
 
