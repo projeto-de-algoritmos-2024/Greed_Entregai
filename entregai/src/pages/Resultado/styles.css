@@ -41,8 +41,10 @@
 
 .time-slot {
   text-align: center;
+  position: relative;
   font-size: 16px;
-  padding: 5px;
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
 }
 
 /* Barras de entrega */

@@ -2,12 +2,16 @@ import React from 'react';
 import './styles.css';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/Logo1.png';
+
+interface Delivery {
+    startTime: string;
+    endTime: string;
+}
 
 const Resultado: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { numEntregas, horarios } = location.state as { numEntregas: number, horarios: { startTime: string, endTime: string }[] };
+    const { horarios } = location.state as { horarios: Delivery[] };
 
     // Função para calcular a posição e a largura da entrega no gráfico
     const getDeliveryPosition = (startTime: string, endTime: string) => {
@@ -43,17 +47,43 @@ const Resultado: React.FC = () => {
     const totalTimeSpan = latestTime - earliestTime; // Em minutos
     const slotWidth = (100 / (totalTimeSpan / 30)); // A largura de cada slot (em %)
 
+    // Algoritmo de Interval Scheduling: Ordenar pelo horário de término e selecionar as não sobrepostas
+    const sortedHorarios = [...horarios].sort((a, b) => {
+        const aEnd = new Date(`1970-01-01T${a.endTime}:00`).getHours() * 60 + new Date(`1970-01-01T${a.endTime}:00`).getMinutes();
+        const bEnd = new Date(`1970-01-01T${b.endTime}:00`).getHours() * 60 + new Date(`1970-01-01T${b.endTime}:00`).getMinutes();
+        return aEnd - bEnd;
+    });
+
+    // Implementar o algoritmo de intervalo para descarte de entregas
+    const selectedDeliveries: Delivery[] = [];
+    const discardedDeliveries: Delivery[] = [];
+    let lastEndTime = -Infinity; // Inicializar com um valor que nunca será válido
+
+    sortedHorarios.forEach((delivery) => {
+        const { startTime, endTime } = delivery;
+        const startMinutes = new Date(`1970-01-01T${startTime}:00`).getHours() * 60 + new Date(`1970-01-01T${startTime}:00`).getMinutes();
+        const endMinutes = new Date(`1970-01-01T${endTime}:00`).getHours() * 60 + new Date(`1970-01-01T${endTime}:00`).getMinutes();
+
+        // Se a entrega não se sobrepõe com a anterior selecionada, adiciona à seleção
+        if (startMinutes >= lastEndTime) {
+            selectedDeliveries.push(delivery);
+            lastEndTime = endMinutes; // Atualiza o tempo de término
+        } else {
+            discardedDeliveries.push(delivery); // Caso contrário, descarta
+        }
+    });
+
     const handleNext = () => {
-      navigate('/');
-  };
+        navigate('/');
+    };
 
     return (
         <div className="container">
             <div className="graph">
                 {/* Linha do tempo */}
                 <div className="time-line">
-                    {Array.from({ length: (latestTime - earliestTime) / 30 + 1 }).map((_, index) => {
-                        const timeInMinutes = earliestTime + index * 30;
+                    {Array.from({ length: (latestTime - earliestTime) / 10 + 1 }).map((_, index) => {
+                        const timeInMinutes = earliestTime + index * 10;
                         const hours = Math.floor(timeInMinutes / 60);
                         const minutes = timeInMinutes % 60;
                         return (
@@ -62,7 +92,7 @@ const Resultado: React.FC = () => {
                                 className="time-slot"
                                 style={{ width: `${slotWidth}%` }}
                             >
-                                {`${hours}:${minutes === 0 ? '00' : '30'}`}
+                                {`${hours}:${minutes === 0 ? '00' : minutes}`}
                             </div>
                         );
                     })}
@@ -70,8 +100,12 @@ const Resultado: React.FC = () => {
 
                 {/* Barras de entregas */}
                 <div className="delivery-bars">
-                    {horarios.map((horario, index) => {
+                    {sortedHorarios.map((horario, index) => {
                         const { startMinutes, endMinutes } = getDeliveryPosition(horario.startTime, horario.endTime);
+                        const isDiscarded = discardedDeliveries.some(
+                            (discarded) => discarded.startTime === horario.startTime && discarded.endTime === horario.endTime
+                        );
+
                         return (
                             <div
                                 key={index}
@@ -80,19 +114,22 @@ const Resultado: React.FC = () => {
                                     left: `${(startMinutes - earliestTime) / totalTimeSpan * 100}%`, // Posição horizontal
                                     width: `${(endMinutes - startMinutes) / totalTimeSpan * 100}%`, // Largura proporcional
                                     top: `${index * 40}px`, // Distância entre as entregas
+                                    backgroundColor: isDiscarded ? 'red' : '#0C1F71', // Cor das entregas
+                                    textDecoration: isDiscarded ? 'line-through' : 'none', 
                                 }}
                             >
-                                Entrega {index + 1}
+                                {`Entrega ${index + 1}`}
                             </div>
                         );
                     })}
                 </div>
             </div>
-            <br></br>
-            <br></br>
-            <button type="submit" className="button" onClick={handleNext} >Voltar</button>
+            <br />
+            <br />
+            <button type="submit" className="button" onClick={handleNext}>Voltar</button>
         </div>
     );
 };
 
 export default Resultado;
+
