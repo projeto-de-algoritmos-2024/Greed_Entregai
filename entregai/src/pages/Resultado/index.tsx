@@ -1,17 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import styled, { css, keyframes } from "styled-components";
+import caminhao from '../../assets/Caminhao.png'
+
+
 
 interface Delivery {
     startTime: string;
     endTime: string;
 }
 
+const moveToCenter = keyframes`
+  from {
+    transform: translateX(-50vw);
+  }
+  to {
+    transform: translateX(0vw);
+  }
+`;
+
+const AnimatedDiv = styled.div<{ isAnimating: boolean }>`
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    ${({ isAnimating }) =>
+        isAnimating &&
+        css`
+        animation: ${moveToCenter} 2s ease-in-out forwards;
+    `}
+`;
+
 const Resultado: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { horarios } = location.state as { horarios: Delivery[] };
+    const [isAnimating, setIsAnimating] = useState(true);
+  
+    useEffect(() => {
+      if (isAnimating) {
+        const timer = setTimeout(() => {
+          setIsAnimating(false);
+        }, 2000); // A duração da animação é 2s
+        return () => clearTimeout(timer);
+      }
+    }, [isAnimating]);
+  
 
     // Função para calcular a posição e a largura da entrega no gráfico
     const getDeliveryPosition = (startTime: string, endTime: string) => {
@@ -79,54 +116,71 @@ const Resultado: React.FC = () => {
 
     return (
         <div className="container">
-            <div className="graph">
-                {/* Linha do tempo */}
-                <div className="time-line">
-                    {Array.from({ length: (latestTime - earliestTime) / 10 + 1 }).map((_, index) => {
-                        const timeInMinutes = earliestTime + index * 10;
-                        const hours = Math.floor(timeInMinutes / 60);
-                        const minutes = timeInMinutes % 60;
-                        return (
-                            <div
-                                key={index}
-                                className="time-slot"
-                                style={{ width: `${slotWidth}%` }}
-                            >
-                                {`${hours}:${minutes === 0 ? '00' : minutes}`}
-                            </div>
-                        );
-                    })}
-                </div>
-
-                {/* Barras de entregas */}
-                <div className="delivery-bars">
-                    {sortedHorarios.map((horario, index) => {
-                        const { startMinutes, endMinutes } = getDeliveryPosition(horario.startTime, horario.endTime);
-                        const isDiscarded = discardedDeliveries.some(
-                            (discarded) => discarded.startTime === horario.startTime && discarded.endTime === horario.endTime
-                        );
-
-                        return (
-                            <div
-                                key={index}
-                                className="delivery"
-                                style={{
-                                    left: `${(startMinutes - earliestTime) / totalTimeSpan * 100}%`, // Posição horizontal
-                                    width: `${(endMinutes - startMinutes) / totalTimeSpan * 100}%`, // Largura proporcional
-                                    top: `${index * 40}px`, // Distância entre as entregas
-                                    backgroundColor: isDiscarded ? 'red' : '#0C1F71', // Cor das entregas
-                                    textDecoration: isDiscarded ? 'line-through' : 'none', 
-                                }}
-                            >
-                                {`Entrega ${index + 1}`}
-                            </div>
-                        );
-                    })}
-                </div>
+        {isAnimating ? ( 
+            <div className='container'>
+                <AnimatedDiv isAnimating={isAnimating} >
+                    <img src={caminhao} alt="Caminhao" width="200" height="200" />
+                </AnimatedDiv>
             </div>
-            <br />
-            <br />
-            <button type="submit" className="button" onClick={handleNext}>Voltar</button>
+        ):(
+            <>
+                <div className="graph">
+                    {/* Linha do tempo */}
+                    <div className="time-line">
+                        {Array.from({ length: (latestTime - earliestTime) / 10 + 1 }).map((_, index) => {
+                            const timeInMinutes = earliestTime + index * 10;
+                            const hours = Math.floor(timeInMinutes / 60);
+                            const minutes = timeInMinutes % 60;
+                            return (
+                                <div
+                                    key={index}
+                                    className="time-slot"
+                                    style={{ width: `${slotWidth}%` }}
+                                >
+                                    {`${hours}:${minutes === 0 ? '00' : minutes}`}
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Barras de entregas */}
+                    <div className="delivery-bars">
+                        {sortedHorarios.map((horario, index) => {
+                            const { startMinutes, endMinutes } = getDeliveryPosition(horario.startTime, horario.endTime);
+                            const isDiscarded = discardedDeliveries.some(
+                                (discarded) => discarded.startTime === horario.startTime && discarded.endTime === horario.endTime
+                            );
+
+                            return (
+                                <div
+                                    key={index}
+                                    className="delivery"
+                                    style={{
+                                        left: `${(startMinutes - earliestTime) / totalTimeSpan * 100}%`, // Posição horizontal
+                                        width: `${(endMinutes - startMinutes) / totalTimeSpan * 100}%`, // Largura proporcional
+                                        top: `${index * 50}px`, // Distância entre as entregas
+                                        backgroundColor: isDiscarded ? 'red' : '#0C1F71', // Cor das entregas
+                                        textDecoration: isDiscarded ? 'line-through' : 'none', 
+                                    }}
+                                >
+                                    {`Entrega ${index + 1}`}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                <h4 className='delivered'>Máximo de entregas possíveis: {sortedHorarios.filter((horario) =>  !discardedDeliveries.some(
+                                (discarded) => discarded.startTime === horario.startTime && discarded.endTime === horario.endTime
+                            )).length}</h4>
+                <h4 className='discarded'>Entregas descartadas: {sortedHorarios.filter((horario) =>  discardedDeliveries.some(
+                                (discarded) => discarded.startTime === horario.startTime && discarded.endTime === horario.endTime
+                            )).length}</h4>
+                <button type="submit" className="button2" onClick={handleNext}>Voltar</button>
+            </>
+        )}
         </div>
     );
 };

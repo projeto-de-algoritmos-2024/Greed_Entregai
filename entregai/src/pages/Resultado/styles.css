@@ -36,7 +36,6 @@
   position: relative;
   width: 100%; /* A linha do tempo ocupa toda a largura do gráfico */
   height: 30px; /* Altura da linha do tempo */
-  border-bottom: 1px solid #000;
 }
 
 .time-slot {
@@ -76,6 +75,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 20px;
+  /* position: absolute;
+  left: 16px;
+  bottom: 16px; */
 }
 
 .button:hover {
@@ -90,5 +92,36 @@
   background-color: #d6d6d6;
   color: #888;
   cursor: not-allowed;
+}
+
+.delivered{
+  color:#0C1F71;
+  position: absolute;
+  left: 16px;
+  bottom: 130px;
+
+}
+.discarded{
+  color: red;
+  position: absolute;
+  left: 16px;
+  bottom: 100px;
+
+}
+
+.button2 {
+  background-color: #0C1F71;
+  color: #fff;
+  padding: 15px 15px;
+  font-size: 16px;
+  font-weight: 550;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
 }
 
