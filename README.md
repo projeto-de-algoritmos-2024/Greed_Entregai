@@ -23,20 +23,21 @@ O projeto EntregAí foi desenvolvido para demonstrar a aplicação prática do a
 <img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaInicial.png" width="700px">
 
 
-<div align="center">
-    <font size="3">
+
+<font size="3">
         <p style="text-align: center"><b>Figura 2:</b> Página de horários</p>
     </font>
 
 <img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaHorarios.png" width="700px">
 
 
-<div align="center">
-    <font size="3">
+
+<font size="3">
         <p style="text-align: center"><b>Figura 3:</b> Página de resultados</p>
     </font>
 
 <img src="https://github.com/projeto-de-algoritmos-2024/Greed_Entregai/blob/master/entregai/src/assets/PaginaResultados.png" width="700px">
+</div>
 
 
 
@@ -45,8 +46,17 @@ O projeto EntregAí foi desenvolvido para demonstrar a aplicação prática do a
 **Linguagem**: Typescript<br>
 **Framework**: React.js<br>
 
+Antes de começar, certifique-se de ter os seguintes pré-requisitos instalados no seu sistema:
+- Node.JS
+- npm
 
-
+Para rodar o projeto, siga os passos abaixo em um terminal:
+```sh
+npm install styled-components
+git clone https://github.com/projeto-de-algoritmos-2024/Greed_Entregai.git
+cd Greed_Entregai/entregai
+npm run dev
+```
 
 ## Vídeo da apresentação
 --
