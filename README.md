@@ -59,7 +59,8 @@ npm run dev
 ```
 
 ## Vídeo da apresentação
---
+[![Greed](https://img.youtube.com/vi/zjz42lM4zXc.jpg)](https://www.youtube.com/watch?v=zjz42lM4zXc)
+
 
 
 
